@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import ContactRow from "./ContactRow";
 
+const USERS_URL = "https://fsa-jsonplaceholder-69b5c48f1259.herokuapp.com/users";
+
 const dummyContacts = [
     { id: 1, name: "R2-D2", phone: "222-222-2222", email: "r2d2@droids.com" },
     { id: 2, name: "C-3PO", phone: "333-333-3333", email: "c3po@droids.com" },
@@ -8,12 +10,12 @@ const dummyContacts = [
 ];
 
 export default function ContactList({ setSelectedContactId}) {
-    const [contacts, setContacts] = useState(dummyContacts);
+    const [contacts, setContacts] = useState([]);
     console.log("Contacts: ", contacts);
     useEffect(()=>{
         async function fetchContacts() {
             try {
-              let response = await fetch("http://fsa-async-await.herokuapp.com/api/workshop/guests");
+              let response = await fetch(USERS_URL);
               let json = await response.json();
               console.log("fetch response: " , json);
               setContacts(json);
